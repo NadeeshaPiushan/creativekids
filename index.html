@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative Kids | Nurturing Creativity</title>
+    <meta name="description" content="Creative Kids is a nonprofit dedicated to nurturing creativity in children through free programs, workshops, and resources.">
+    
+    <!-- Google Fonts: Nunito for a friendly, round, accessible look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Nunito', 'sans-serif'],
+                    },
+                    colors: {
+                        'ck-blue': '#EC4899',
+                        'ck-yellow': '#84CC16', 
+                        'ck-green': '#22C55E',
+                        'ck-purple': '#D946EF',
+                        'ck-orange': '#84CC16',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Animations */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .blob-shape {
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+        }
+
+        /* Hide scrollbar for clean horizontal scrolling */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-700 bg-gray-50 antialiased selection:bg-ck-yellow selection:text-ck-blue">
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="router('home')">
+                    <img src="creativekids_logo.png" alt="Creative Kids Logo" class="h-20 ml-4 md:ml-8">
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-6">
+                    <button onclick="router('home')" class="nav-link font-bold text-gray-600 hover:text-ck-blue transition">Home</button>
+                    <button onclick="router('about')" class="nav-link font-bold text-gray-600 hover:text-ck-blue transition">About</button>
+                    <button onclick="router('programs')" class="nav-link font-bold text-gray-600 hover:text-ck-blue transition">Programs</button>
+                    <button onclick="router('resources')" class="nav-link font-bold text-gray-600 hover:text-ck-blue transition">Resources</button>
+                    <button onclick="router('get-involved')" class="nav-link font-bold text-gray-600 hover:text-ck-blue transition">Get Involved</button>
+                    <button onclick="router('contact')" class="nav-link font-bold text-gray-600 hover:text-ck-blue transition">Contact</button>
+                    <button onclick="router('donate')" class="bg-ck-yellow text-gray-900 px-5 py-2 rounded-full font-black shadow-lg hover:bg-yellow-300 hover:scale-105 transition transform flex items-center gap-2">
+                        <i class="fa-solid fa-heart text-red-500"></i> Support Us
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="flex items-center md:hidden">
+                    <button onclick="toggleMobileMenu()" class="text-gray-600 hover:text-ck-blue focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 flex flex-col">
+                <button onclick="router('home')" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-ck-blue hover:bg-gray-50 text-left w-full">Home</button>
+                <button onclick="router('about')" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-ck-blue hover:bg-gray-50 text-left w-full">About</button>
+                <button onclick="router('programs')" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-ck-blue hover:bg-gray-50 text-left w-full">Programs</button>
+                <button onclick="router('resources')" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-ck-blue hover:bg-gray-50 text-left w-full">Resources</button>
+                <button onclick="router('get-involved')" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-ck-blue hover:bg-gray-50 text-left w-full">Get Involved</button>
+                <button onclick="router('contact')" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-ck-blue hover:bg-gray-50 text-left w-full">Contact</button>
+                <button onclick="router('donate')" class="mt-4 block w-full text-center px-4 py-3 rounded-xl font-bold bg-ck-yellow text-gray-900">
+                    Donate Now
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <main id="main-content">
+        
+        <!-- HOME PAGE -->
+        <section id="home" class="page-section fade-in">
+            <!-- Hero Section -->
+            <div class="relative bg-gradient-to-r from-blue-50 to-indigo-50 overflow-hidden">
+                <div class="max-w-7xl mx-auto">
+                    <div class="relative z-10 pb-8 bg-transparent sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32 pt-20 px-4 sm:px-6 lg:px-8">
+                        <main class="mt-10 mx-auto max-w-7xl sm:mt-12 md:mt-16 lg:mt-20 xl:mt-28">
+                            <div class="sm:text-center lg:text-left">
+                                <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
+                                    <span class="block xl:inline">Unleashing the next generation of</span>
+                                    <span class="block text-ck-blue">creative thinkers.</span>
+                                </h1>
+                                <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+                                    Creative Kids nurtures essential creativity and innovation skills in every child through free workshops, resources, and community events.
+                                </p>
+                                <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start gap-4">
+                                    <div class="rounded-md shadow">
+                                        <button onclick="router('get-involved')" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-full text-white bg-ck-blue hover:bg-indigo-700 md:py-4 md:text-lg transition transform hover:-translate-y-1">
+                                            Get Involved
+                                        </button>
+                                    </div>
+                                    <div class="mt-3 sm:mt-0 sm:ml-3">
+                                        <button onclick="router('donate')" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-full text-gray-900 bg-ck-yellow hover:bg-yellow-300 md:py-4 md:text-lg transition transform hover:-translate-y-1">
+                                            Support Us
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </main>
+                    </div>
+                </div>
+                <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
+                    <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full opacity-90" src="https://images.unsplash.com/photo-1491841550275-ad7854e35ca6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Children painting together">
+                </div>
+            </div>
+
+            <!-- Highlights -->
+            <div class="py-16 bg-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-12">
+                        <h2 class="text-base text-ck-blue font-semibold tracking-wide uppercase">Our Focus</h2>
+                        <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                            Programs designed to inspire
+                        </p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <!-- Card 1 -->
+                        <div class="bg-blue-50 rounded-2xl p-8 text-center transition hover:shadow-lg cursor-pointer" onclick="router('programs')">
+                            <div class="inline-flex items-center justify-center h-16 w-16 rounded-full bg-blue-100 text-ck-blue mb-5">
+                                <i class="fa-solid fa-paintbrush text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Creativity Workshops</h3>
+                            <p class="text-gray-600">Hands-on art and design thinking sessions designed to spark imagination and problem-solving.</p>
+                        </div>
+                        <!-- Card 2 -->
+                        <div class="bg-green-50 rounded-2xl p-8 text-center transition hover:shadow-lg cursor-pointer" onclick="router('programs')">
+                            <div class="inline-flex items-center justify-center h-16 w-16 rounded-full bg-green-100 text-ck-green mb-5">
+                                <i class="fa-solid fa-lightbulb text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Innovation Labs</h3>
+                            <p class="text-gray-600">Dedicated spaces for children to experiment with S.T.E.A.M. concepts, robotics, and coding.</p>
+                        </div>
+                        <!-- Card 3 -->
+                        <div class="bg-purple-50 rounded-2xl p-8 text-center transition hover:shadow-lg cursor-pointer" onclick="router('resources')">
+                            <div class="inline-flex items-center justify-center h-16 w-16 rounded-full bg-purple-100 text-ck-purple mb-5">
+                                <i class="fa-solid fa-book-open text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Free Resources</h3>
+                            <p class="text-gray-600">Downloadable guides, activity sheets, and videos for parents and educators everywhere.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Testimonials -->
+            <div class="bg-ck-yellow/20 py-16">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <h2 class="text-3xl font-extrabold text-center text-gray-900 mb-12">Voices from our Community</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="bg-white p-8 rounded-3xl shadow-sm relative">
+                            <i class="fa-solid fa-quote-left text-4xl text-gray-200 absolute top-4 left-4"></i>
+                            <p class="text-lg text-gray-600 italic relative z-10 mb-4">"Our workshops were transformative. My child didn't just learn to paint; they learned to see solutions everywhere."</p>
+                            <div class="flex items-center">
+                                <div class="h-10 w-10 rounded-full bg-ck-blue flex items-center justify-center text-white font-bold">S</div>
+                                <div class="ml-3">
+                                    <p class="text-sm font-bold text-gray-900">Sarah M.</p>
+                                    <p class="text-xs text-gray-500">Parent</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white p-8 rounded-3xl shadow-sm relative">
+                            <i class="fa-solid fa-quote-left text-4xl text-gray-200 absolute top-4 left-4"></i>
+                            <p class="text-lg text-gray-600 italic relative z-10 mb-4">"The free resources and school partnership materials have revitalized our curriculum. Creativity is now a core part of our learning."</p>
+                            <div class="flex items-center">
+                                <div class="h-10 w-10 rounded-full bg-ck-green flex items-center justify-center text-white font-bold">C</div>
+                                <div class="ml-3">
+                                    <p class="text-sm font-bold text-gray-900">Mr. Chen</p>
+                                    <p class="text-xs text-gray-500">Elementary School Teacher</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT PAGE -->
+        <section id="about" class="page-section hidden fade-in">
+            <div class="py-16 bg-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="lg:text-center mb-16">
+                        <h2 class="text-base text-ck-blue font-semibold tracking-wide uppercase">Who We Are</h2>
+                        <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                            From Selling Toys to Building Dreams
+                        </p>
+                        <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+                            In 2024, we transitioned from CreativeKids, a successful toy company, into <strong>Creative Kids</strong>. We realized our true passion wasn't selling products, but empowering the hands that use them.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+                        <div>
+                            <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Team meeting" class="rounded-3xl shadow-lg transform rotate-2">
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-4">Our Mission & Vision</h3>
+                            <p class="text-gray-600 mb-6">
+                                <strong>Mission:</strong> To improve and nurture creativity in children through accessible programs, hands-on workshops, and free resources.
+                            </p>
+                            <p class="text-gray-600 mb-6">
+                                <strong>Vision:</strong> A future where every child sees themselves as a confident, capable, and lifelong creative problem-solver.
+                            </p>
+                            <h4 class="font-bold text-lg mb-2">Our Values</h4>
+                            <ul class="space-y-2">
+                                <li class="flex items-center"><i class="fa-solid fa-check-circle text-ck-green mr-2"></i> Inspiration</li>
+                                <li class="flex items-center"><i class="fa-solid fa-check-circle text-ck-green mr-2"></i> Inclusion</li>
+                                <li class="flex items-center"><i class="fa-solid fa-check-circle text-ck-green mr-2"></i> Innovation</li>
+                                <li class="flex items-center"><i class="fa-solid fa-check-circle text-ck-green mr-2"></i> Impact</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROGRAMS PAGE -->
+        <section id="programs" class="page-section hidden fade-in">
+            <div class="py-16 bg-gray-50">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl font-extrabold text-gray-900">Our Programs</h2>
+                        <p class="mt-4 text-xl text-gray-500">Sparking imagination through hands-on experiences.</p>
+                    </div>
+
+                    <div class="space-y-12">
+                        <!-- Program 1 -->
+                        <div class="flex flex-col md:flex-row bg-white rounded-3xl shadow-sm overflow-hidden">
+                            <div class="md:w-1/2">
+                                <img class="h-64 w-full object-cover md:h-full" src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Kids in workshop">
+                            </div>
+                            <div class="p-8 md:w-1/2 flex flex-col justify-center">
+                                <div class="uppercase tracking-wide text-sm text-ck-blue font-bold">In-Person</div>
+                                <h3 class="block mt-1 text-2xl leading-tight font-extrabold text-gray-900">Creativity Workshops</h3>
+                                <p class="mt-2 text-gray-600">High-energy, hands-on sessions focused on design thinking, visual arts, storytelling, and imaginative play. Our workshops are free or offered on a sliding scale for qualifying families.</p>
+                                <button onclick="router('contact')" class="mt-4 text-ck-blue font-semibold hover:underline">Request a workshop in your city &rarr;</button>
+                            </div>
+                        </div>
+
+                        <!-- Program 2 -->
+                        <div class="flex flex-col md:flex-row-reverse bg-white rounded-3xl shadow-sm overflow-hidden">
+                            <div class="md:w-1/2">
+                                <img class="h-64 w-full object-cover md:h-full" src="https://images.unsplash.com/photo-1531482615713-2afd69097998?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="School presentation">
+                            </div>
+                            <div class="p-8 md:w-1/2 flex flex-col justify-center">
+                                <div class="uppercase tracking-wide text-sm text-ck-orange font-bold">Education</div>
+                                <h3 class="block mt-1 text-2xl leading-tight font-extrabold text-gray-900">School Partnerships</h3>
+                                <p class="mt-2 text-gray-600">Collaborative programs that integrate creativity into existing school curricula (S.T.E.A.M., Language Arts, Social Studies). We provide training and materials.</p>
+                                <button onclick="router('get-involved')" class="mt-4 text-ck-orange font-semibold hover:underline">Partner with us &rarr;</button>
+                            </div>
+                        </div>
+
+                         <!-- Program 3 -->
+                         <div class="flex flex-col md:flex-row bg-white rounded-3xl shadow-sm overflow-hidden">
+                            <div class="md:w-1/2">
+                                <img class="h-64 w-full object-cover md:h-full" src="https://images.unsplash.com/photo-1596496050844-461af543e129?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Community event">
+                            </div>
+                            <div class="p-8 md:w-1/2 flex flex-col justify-center">
+                                <div class="uppercase tracking-wide text-sm text-ck-green font-bold">Outreach</div>
+                                <h3 class="block mt-1 text-2xl leading-tight font-extrabold text-gray-900">Innovation Labs & Events</h3>
+                                <p class="mt-2 text-gray-600">Dedicated spaces equipped with tools for electronics and crafts, plus large public events like "Maker Fairs" designed to bring families together.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- GET INVOLVED PAGE -->
+        <section id="get-involved" class="page-section hidden fade-in">
+            <div class="py-16 bg-blue-50">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl font-extrabold text-gray-900">Get Involved</h2>
+                        <p class="mt-4 text-xl text-gray-500">Your creativity makes a difference.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- Volunteer -->
+                        <div class="bg-white p-8 rounded-3xl shadow-sm border-t-8 border-ck-blue">
+                            <div class="flex items-center mb-6">
+                                <div class="bg-blue-100 p-3 rounded-full mr-4">
+                                    <i class="fa-solid fa-hand-holding-heart text-2xl text-ck-blue"></i>
+                                </div>
+                                <h3 class="text-2xl font-bold text-gray-900">Volunteer</h3>
+                            </div>
+                            <p class="text-gray-600 mb-6">We rely on passionate volunteers! Opportunities range from workshop assistants and event support to resource development.</p>
+                            <ul class="mb-6 space-y-2 text-gray-600">
+                                <li><i class="fa-solid fa-angle-right text-ck-blue mr-2"></i> Workshop Mentors</li>
+                                <li><i class="fa-solid fa-angle-right text-ck-blue mr-2"></i> Event Crew</li>
+                                <li><i class="fa-solid fa-angle-right text-ck-blue mr-2"></i> Resource Translators</li>
+                            </ul>
+                            <button onclick="router('contact')" class="w-full bg-ck-blue text-white font-bold py-3 rounded-xl hover:bg-blue-700 transition">Apply to Volunteer</button>
+                        </div>
+
+                        <!-- Partner -->
+                        <div class="bg-white p-8 rounded-3xl shadow-sm border-t-8 border-ck-orange">
+                            <div class="flex items-center mb-6">
+                                <div class="bg-orange-100 p-3 rounded-full mr-4">
+                                    <i class="fa-solid fa-handshake text-2xl text-ck-orange"></i>
+                                </div>
+                                <h3 class="text-2xl font-bold text-gray-900">Partner With Us</h3>
+                            </div>
+                            <p class="text-gray-600 mb-6">We seek partnerships with schools, community centers, and corporations to expand our reach and maximize impact.</p>
+                            <ul class="mb-6 space-y-2 text-gray-600">
+                                <li><i class="fa-solid fa-angle-right text-ck-orange mr-2"></i> Co-host Events</li>
+                                <li><i class="fa-solid fa-angle-right text-ck-orange mr-2"></i> School Implementation</li>
+                                <li><i class="fa-solid fa-angle-right text-ck-orange mr-2"></i> Corporate Sponsorships</li>
+                            </ul>
+                            <button onclick="router('contact')" class="w-full bg-ck-orange text-white font-bold py-3 rounded-xl hover:bg-orange-600 transition">Discuss Partnership</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DONATE PAGE -->
+        <section id="donate" class="page-section hidden fade-in">
+            <div class="py-16 bg-white">
+                <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <h2 class="text-3xl font-extrabold text-gray-900 mb-4">Invest in a Creative Future</h2>
+                    <p class="text-xl text-gray-600 mb-12">Your tax-deductible contribution ensures our programs and resources remain free and accessible to every child.</p>
+
+                    <!-- Impact Cards -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                        <div class="border-2 border-gray-100 rounded-2xl p-6 hover:border-ck-yellow transition cursor-pointer group" onclick="selectDonation(50)">
+                            <h3 class="text-3xl font-black text-ck-blue mb-2">$50</h3>
+                            <p class="text-sm text-gray-500">Provides art supplies for one child to attend a full workshop series.</p>
+                            <div class="mt-4 bg-gray-100 h-2 rounded-full overflow-hidden group-hover:bg-yellow-100">
+                                <div class="bg-ck-yellow h-full w-1/3"></div>
+                            </div>
+                        </div>
+                        <div class="border-2 border-ck-yellow bg-yellow-50/50 rounded-2xl p-6 relative cursor-pointer" onclick="selectDonation(250)">
+                            <div class="absolute top-0 right-0 bg-ck-yellow text-xs font-bold px-2 py-1 rounded-bl-lg rounded-tr-lg">POPULAR</div>
+                            <h3 class="text-3xl font-black text-ck-blue mb-2">$250</h3>
+                            <p class="text-sm text-gray-500">Helps develop one new free online activity guide for parents and teachers.</p>
+                            <div class="mt-4 bg-gray-200 h-2 rounded-full overflow-hidden">
+                                <div class="bg-ck-blue h-full w-2/3"></div>
+                            </div>
+                        </div>
+                        <div class="border-2 border-gray-100 rounded-2xl p-6 hover:border-ck-yellow transition cursor-pointer group" onclick="selectDonation(1000)">
+                            <h3 class="text-3xl font-black text-ck-blue mb-2">$1,000</h3>
+                            <p class="text-sm text-gray-500">Funds a full Pop-Up Innovation Lab at a community event.</p>
+                            <div class="mt-4 bg-gray-100 h-2 rounded-full overflow-hidden group-hover:bg-yellow-100">
+                                <div class="bg-ck-yellow h-full w-full"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mock Payment Form -->
+                    <div class="bg-gray-50 p-8 rounded-3xl max-w-lg mx-auto shadow-inner">
+                        <h4 class="font-bold text-lg mb-4">Make a Donation</h4>
+                        <div class="flex gap-2 mb-4">
+                            <button class="flex-1 py-2 bg-white border border-gray-300 rounded-lg text-gray-700 font-bold focus:ring-2 focus:ring-ck-blue focus:border-transparent">One-Time</button>
+                            <button class="flex-1 py-2 bg-transparent border border-gray-300 rounded-lg text-gray-500 font-medium hover:bg-white">Monthly</button>
+                        </div>
+                        <input type="number" id="donation-amount" placeholder="Enter Amount ($)" class="w-full p-3 mb-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-ck-blue">
+                        <button onclick="handleDonate()" class="w-full bg-ck-green text-white font-bold text-lg py-4 rounded-xl shadow-lg hover:bg-green-600 transition transform hover:scale-[1.02]">
+                            Donate Now
+                        </button>
+                        <p class="text-xs text-gray-400 mt-4"><i class="fa-solid fa-lock"></i> Secure 256-bit SSL Encrypted payment.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RESOURCES PAGE -->
+        <section id="resources" class="page-section hidden fade-in">
+            <div class="py-16 bg-purple-50">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl font-extrabold text-gray-900">Free Resources</h2>
+                        <p class="mt-4 text-xl text-gray-500">Tools to ignite creativity at home and in the classroom.</p>
+                    </div>
+
+                    <!-- Resource Categories -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- Printable -->
+                        <div class="bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-md transition">
+                            <div class="bg-purple-100 h-32 flex items-center justify-center">
+                                <i class="fa-regular fa-file-pdf text-5xl text-purple-400"></i>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="font-bold text-lg mb-2">Build a Better Boat</h3>
+                                <p class="text-sm text-gray-600 mb-4">A physics and design challenge for ages 6-10. Uses recycled materials.</p>
+                                <a href="#" class="text-ck-purple font-bold hover:underline">Download PDF &darr;</a>
+                            </div>
+                        </div>
+
+                        <!-- Printable -->
+                        <div class="bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-md transition">
+                            <div class="bg-blue-100 h-32 flex items-center justify-center">
+                                <i class="fa-regular fa-file-pdf text-5xl text-blue-400"></i>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="font-bold text-lg mb-2">Storytelling Dice</h3>
+                                <p class="text-sm text-gray-600 mb-4">Printable templates to create dice that generate infinite story prompts.</p>
+                                <a href="#" class="text-ck-blue font-bold hover:underline">Download PDF &darr;</a>
+                            </div>
+                        </div>
+
+                        <!-- Video -->
+                        <div class="bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-md transition">
+                            <div class="bg-red-100 h-32 flex items-center justify-center">
+                                <i class="fa-brands fa-youtube text-5xl text-red-400"></i>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="font-bold text-lg mb-2">Process Over Product</h3>
+                                <p class="text-sm text-gray-600 mb-4">A 5-minute guide for parents on how to praise creative effort, not just results.</p>
+                                <a href="#" class="text-red-500 font-bold hover:underline">Watch Video &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT PAGE -->
+        <section id="contact" class="page-section hidden fade-in">
+            <div class="py-16 bg-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl font-extrabold text-gray-900">Contact Us</h2>
+                        <p class="mt-4 text-xl text-gray-500">Have questions? Want to collaborate?</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                        <!-- Info -->
+                        <div class="bg-blue-50 p-8 rounded-3xl">
+                            <h3 class="text-2xl font-bold text-ck-blue mb-6">Get in Touch</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-start">
+                                    <i class="fa-solid fa-envelope mt-1 text-ck-blue mr-3"></i>
+                                    <div>
+                                        <p class="font-bold">Email</p>
+                                        <p class="text-gray-600">info@creativekids.org</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fa-solid fa-location-dot mt-1 text-ck-blue mr-3"></i>
+                                    <div>
+                                        <p class="font-bold">Headquarters</p>
+                                        <p class="text-gray-600">123 Creativity Lane<br>Innovation City, CA 90210</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <h4 class="font-bold text-lg mt-8 mb-4">Follow Us</h4>
+                            <div class="flex space-x-4">
+                                <a href="#" class="bg-white p-3 rounded-full shadow-sm hover:text-ck-blue transition"><i class="fa-brands fa-facebook-f"></i></a>
+                                <a href="#" class="bg-white p-3 rounded-full shadow-sm hover:text-pink-500 transition"><i class="fa-brands fa-instagram"></i></a>
+                                <a href="#" class="bg-white p-3 rounded-full shadow-sm hover:text-blue-400 transition"><i class="fa-brands fa-twitter"></i></a>
+                                <a href="#" class="bg-white p-3 rounded-full shadow-sm hover:text-blue-700 transition"><i class="fa-brands fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+
+                        <!-- Form -->
+                        <form onsubmit="handleContact(event)" class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 mb-1">Name</label>
+                                <input type="text" required class="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-ck-blue focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 mb-1">Email</label>
+                                <input type="email" required class="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-ck-blue focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 mb-1">Subject</label>
+                                <select class="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-ck-blue focus:outline-none">
+                                    <option>General Inquiry</option>
+                                    <option>Volunteering</option>
+                                    <option>Partnership</option>
+                                    <option>Media</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 mb-1">Message</label>
+                                <textarea rows="4" required class="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-ck-blue focus:outline-none"></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-ck-blue text-white font-bold py-3 rounded-xl hover:bg-indigo-700 transition">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-12 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div class="col-span-1 md:col-span-1">
+                    <span class="font-extrabold text-xl tracking-tight text-white mb-4 block">
+                        Creative Kids
+                    </span>
+                    <p class="text-gray-400 text-sm">Empowering the next generation through art, science, and imagination.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#" onclick="router('about')" class="hover:text-white">About Us</a></li>
+                        <li><a href="#" onclick="router('programs')" class="hover:text-white">Programs</a></li>
+                        <li><a href="#" onclick="router('donate')" class="hover:text-white">Support Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Resources</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#" onclick="router('resources')" class="hover:text-white">Activity Guides</a></li>
+                        <li><a href="#" onclick="router('resources')" class="hover:text-white">For Teachers</a></li>
+                        <li><a href="#" class="hover:text-white">Annual Report</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Stay Inspired</h4>
+                    <form onsubmit="event.preventDefault(); alert('Thanks for subscribing!');" class="flex flex-col gap-2">
+                        <input type="email" placeholder="Enter your email" class="p-2 rounded-lg text-gray-900 text-sm">
+                        <button class="bg-ck-blue text-white text-sm font-bold py-2 rounded-lg hover:bg-indigo-600">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8">
+                <div class="flex justify-center gap-6 mb-6">
+                    <a href="https://facebook.com/creativekids" target="_blank" class="text-gray-400 hover:text-ck-blue transition-colors" aria-label="Facebook">
+                        <i class="fab fa-facebook-f text-2xl"></i>
+                    </a>
+                    <a href="https://twitter.com/creativekids" target="_blank" class="text-gray-400 hover:text-ck-blue transition-colors" aria-label="Twitter">
+                        <i class="fab fa-twitter text-2xl"></i>
+                    </a>
+                    <a href="https://instagram.com/creativekids" target="_blank" class="text-gray-400 hover:text-ck-blue transition-colors" aria-label="Instagram">
+                        <i class="fab fa-instagram text-2xl"></i>
+                    </a>
+                    <a href="https://youtube.com/creativekids" target="_blank" class="text-gray-400 hover:text-ck-blue transition-colors" aria-label="YouTube">
+                        <i class="fab fa-youtube text-2xl"></i>
+                    </a>
+                    <a href="https://linkedin.com/company/creativekids" target="_blank" class="text-gray-400 hover:text-ck-blue transition-colors" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin-in text-2xl"></i>
+                    </a>
+                </div>
+                <div class="text-center text-sm text-gray-500">
+                    <p>&copy; 2025 Creative Kids. A 501(c)(3) Nonprofit Organization. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Navigation & Interactions -->
+    <script>
+        // Router Logic
+        const pages = ['home', 'about', 'programs', 'get-involved', 'donate', 'resources', 'contact'];
+        
+        function router(pageId) {
+            // Hide all pages
+            pages.forEach(page => {
+                const el = document.getElementById(page);
+                if (el) el.classList.add('hidden');
+            });
+            
+            // Show target page
+            const target = document.getElementById(pageId);
+            if (target) {
+                target.classList.remove('hidden');
+                window.scrollTo(0, 0);
+            }
+
+            // Close mobile menu if open
+            document.getElementById('mobile-menu').classList.add('hidden');
+        }
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Donation Selector Visual Logic
+        function selectDonation(amount) {
+            document.getElementById('donation-amount').value = amount;
+            // Scroll to form slightly
+            document.getElementById('donation-amount').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function handleDonate() {
+            const amt = document.getElementById('donation-amount').value;
+            if(!amt) {
+                alert('Please enter a donation amount.');
+                return;
+            }
+            alert(`Thank you for your generous pledge of $${amt}! \n\n(This is a frontend demo - no payment processed)`);
+        }
+
+        function handleContact(e) {
+            e.preventDefault();
+            alert('Message Sent! We will get back to you shortly.');
+            // Reset form
+            e.target.reset();
+        }
+
+        // Initialize Home
+        router('home');
+    </script>
+</body>
+</html>
