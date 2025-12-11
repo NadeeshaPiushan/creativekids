@@ -80,7 +80,7 @@
                     <button onclick="router('resources')" class="nav-link font-bold text-gray-600 hover:text-ck-blue transition">Resources</button>
                     <button onclick="router('get-involved')" class="nav-link font-bold text-gray-600 hover:text-ck-blue transition">Get Involved</button>
                     <button onclick="router('contact')" class="nav-link font-bold text-gray-600 hover:text-ck-blue transition">Contact</button>
-                    <button onclick="router('donate')" class="bg-ck-yellow text-gray-900 px-5 py-2 rounded-full font-black shadow-lg hover:bg-yellow-300 hover:scale-105 transition transform flex items-center gap-2">
+                    <button onclick="router('donate')" class="hidden bg-ck-yellow text-gray-900 px-5 py-2 rounded-full font-black shadow-lg hover:bg-yellow-300 hover:scale-105 transition transform flex items-center gap-2" aria-hidden="true">
                         <i class="fa-solid fa-heart text-red-500"></i> Support Us
                     </button>
                 </div>
@@ -88,14 +88,14 @@
                 <!-- Mobile Menu Button -->
                 <div class="flex items-center md:hidden">
                     <button onclick="toggleMobileMenu()" class="text-gray-600 hover:text-ck-blue focus:outline-none">
-                        <i class="fa-solid fa-bars text-2xl"></i>
-                    </button>
+                            <i class="fa-solid fa-bars text-2xl"></i>
+                        </button>
                 </div>
             </div>
         </div>
 
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100">
+                <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 flex flex-col">
                 <button onclick="router('home')" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-ck-blue hover:bg-gray-50 text-left w-full">Home</button>
                 <button onclick="router('about')" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-ck-blue hover:bg-gray-50 text-left w-full">About</button>
@@ -103,7 +103,7 @@
                 <button onclick="router('resources')" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-ck-blue hover:bg-gray-50 text-left w-full">Resources</button>
                 <button onclick="router('get-involved')" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-ck-blue hover:bg-gray-50 text-left w-full">Get Involved</button>
                 <button onclick="router('contact')" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-ck-blue hover:bg-gray-50 text-left w-full">Contact</button>
-                <button onclick="router('donate')" class="mt-4 block w-full text-center px-4 py-3 rounded-xl font-bold bg-ck-yellow text-gray-900">
+                <button onclick="router('donate')" class="hidden mt-4 block w-full text-center px-4 py-3 rounded-xl font-bold bg-ck-yellow text-gray-900" aria-hidden="true">
                     Donate Now
                 </button>
             </div>
@@ -135,7 +135,7 @@
                                         </button>
                                     </div>
                                     <div class="mt-3 sm:mt-0 sm:ml-3">
-                                        <button onclick="router('donate')" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-full text-gray-900 bg-ck-yellow hover:bg-yellow-300 md:py-4 md:text-lg transition transform hover:-translate-y-1">
+                                        <button onclick="router('donate')" class="hidden w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-full text-gray-900 bg-ck-yellow hover:bg-yellow-300 md:py-4 md:text-lg transition transform hover:-translate-y-1" aria-hidden="true">
                                             Support Us
                                         </button>
                                     </div>
@@ -477,14 +477,21 @@
                                     <i class="fa-solid fa-envelope mt-1 text-ck-blue mr-3"></i>
                                     <div>
                                         <p class="font-bold">Email</p>
-                                        <p class="text-gray-600">info@creativekids.org</p>
+                                        <p class="text-gray-600">creativekids.lk@gmail.com</p>
                                     </div>
                                 </div>
                                 <div class="flex items-start">
                                     <i class="fa-solid fa-location-dot mt-1 text-ck-blue mr-3"></i>
                                     <div>
-                                        <p class="font-bold">Headquarters</p>
-                                        <p class="text-gray-600">123 Creativity Lane<br>Innovation City, CA 90210</p>
+                                        <p class="font-bold">Address</p>
+                                        <p class="text-gray-600">236/2B, T. C. Road<br>Kotikawatta, 10620</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fa-solid fa-phone mt-1 text-ck-blue mr-3"></i>
+                                    <div>
+                                        <p class="font-bold">Phone</p>
+                                        <p class="text-gray-600">+94 114 193 515</p>
                                     </div>
                                 </div>
                             </div>
@@ -545,7 +552,7 @@
                     <ul class="space-y-2 text-sm text-gray-400">
                         <li><a href="#" onclick="router('about')" class="hover:text-white">About Us</a></li>
                         <li><a href="#" onclick="router('programs')" class="hover:text-white">Programs</a></li>
-                        <li><a href="#" onclick="router('donate')" class="hover:text-white">Support Us</a></li>
+                        <!-- Support link hidden until payment setup -->
                     </ul>
                 </div>
                 <div>
@@ -583,7 +590,7 @@
                     </a>
                 </div>
                 <div class="text-center text-sm text-gray-500">
-                    <p>&copy; 2025 Creative Kids. A 501(c)(3) Nonprofit Organization. All rights reserved.</p>
+                    <p>&copy; 2025 Creative Kids. All rights reserved.</p>
                 </div>
             </div>
         </div>
@@ -592,7 +599,7 @@
     <!-- JavaScript for Navigation & Interactions -->
     <script>
         // Router Logic
-        const pages = ['home', 'about', 'programs', 'get-involved', 'donate', 'resources', 'contact'];
+        const pages = ['home', 'about', 'programs', 'get-involved', 'resources', 'contact'];
         
         function router(pageId) {
             // Hide all pages
